@@ -55,7 +55,8 @@ def index(request):
 
 def post_detail(request, id: int):
     try:
-        return render(request, 'blog/detail.html', POSTS[id])
+        post = POSTS[id]
+        return render(request, 'blog/detail.html', {'post': post})
     except KeyError:
         raise Http404("404 (Not Found)")
 
