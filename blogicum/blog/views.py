@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import Http404
 
 posts = [
     {
@@ -43,23 +44,22 @@ posts = [
     },
 ]
 
+POSTS = {post['id']: post for post in posts}
+
 
 # Create your views here.
 def index(request):
-    teamplate = 'blog/index.html'
     context = {'post_list': posts[::-1]}
-    return render(request, teamplate, context)
+    return render(request, 'blog/index.html', context)
 
 
 def post_detail(request, id: int):
-    template = 'blog/detail.html'
-    context = {}
-    if id in range(len(posts)):
-        context = {'post': posts[id]}
-    return render(request, template, context)
+    try:
+        return render(request, 'blog/detail.html', POSTS[id])
+    except KeyError:
+        raise Http404("404 (Not Found)")
 
 
 def category_posts(requests, category_slug):
-    teamplate = 'blog/category.html'
     context = {'slug': category_slug}
-    return render(requests, teamplate, context)
+    return render(requests, 'blog/category.html', context)

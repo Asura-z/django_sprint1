@@ -8,17 +8,17 @@
       <article>
         <ul>
           <li>
-            Место: {{ post.location }}
+            Место: {{ location }}
           </li>
           <li>
-            Дата: {{ post.date }}
+            Дата: {{ date }}
           </li>
           <li>
-            Категория: <a href="">{{ post.category }}</a>
+            Категория: <a href="">{{ category }}</a>
           </li>
         </ul>
         <p>
-          {{ post.text }}
+          {{ text|linebreaksbr }}
         </p>
       </article>
     </div>
